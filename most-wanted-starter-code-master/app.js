@@ -1,10 +1,7 @@
 "use strict";
-
-//Menu functions.
+  //Menu functions.
 //Used for the overall flow of the application.
-/////////////////////////////////////////////////////////////////
 //#region
-
 // app is the function called to start the entire application
 function app(people) {
   let searchType = promptFor(
@@ -16,8 +13,7 @@ function app(people) {
     case "yes":
       searchResults = searchByName(people);
       break;
-    case "no":
-      // TODO: search by traits
+    case "no": prompt("What trait do you want to search using?")// TODO: search by traits
       break;
     default:
       app(people); // restart app
@@ -47,14 +43,11 @@ function mainMenu(person, people) {
   );
 
   switch (displayOption) {
-    case "info":
-      // TODO: get person's info
+    case "info":// TODO: get person's info
       break;
-    case "family":
-      // TODO: get person's family
+    case "family":// TODO: get person's family
       break;
-    case "descendants":
-      // TODO: get person's descendants
+    case "descendants":// TODO: get person's descendants
       break;
     case "restart":
       app(people); // restart
@@ -62,7 +55,7 @@ function mainMenu(person, people) {
     case "quit":
       return; // stop execution
     default:
-      return mainMenu(person, people); // ask again
+      return mainMenu(person, people,); // ask again
   }
 }
 
@@ -91,9 +84,21 @@ function searchByName(people) {
   // TODO: find the person single person object using the name they entered.
   return foundPerson;
 }
-
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-function searchByEyeColor(people) {}
+
+function searchByEyeColor(data) {
+  let eyeColor = promptFor["brown", "black", "hazel", "green", "blue"];
+  let foundEyeColor = data.filter(function (potentialMatch){
+    if(
+      potentialMatch.eyeColor === ["brown", "black", "hazel", "green", "blue"]
+    ){
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return eyeColor, foundEyeColor;
+}
 
 //TODO: add other trait filter functions here.
 
@@ -153,7 +158,6 @@ function yesNo(input) {
     return false;
   }
 }
-
 // helper function to pass in as default promptFor validation.
 //this will always return true for all inputs.
 function autoValid(input) {
