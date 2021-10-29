@@ -14,9 +14,9 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case "no": 
-      searchResults = prompt("What trait do you want to search by?");// TODO: search by traits
+      searchResults = searchByTraits(people);// TODO: search by traits
       break;
-    default:
+      default:
       app(people); // restart app
       break;
   }
@@ -48,10 +48,10 @@ function mainMenu(person, people) {
     let randomInfo = displayPerson(person[0]);// TODO: get person's info
       break;
     case "family":
-     randomInfo = displayPerson(person[0].cuurentSpouse);// TODO: get person's family
+     let randomfamily = displayPerson(person[0]);// TODO: get person's family
       break;
     case "descendants":
-    randomDescendants = app(data["spouse"].map); //TODO: get person's descendants
+    let randomDescendants =displayPerson(person[0]); //TODO: get person's descendants
       break;
     case "restart":
       app(people); // restart
@@ -90,27 +90,35 @@ function searchByName(people) {
 }
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 
-function searchByEyeColorpeople) {
-  let firstName = promptFor("What is the person's first name?", autoValid);
-  let lastName = promptFor("What is the person's last name?", autoValid);
+function searchByEyeColor(people) {
+  let eyeColor = promptFor("which color would you like to search for? blue, brown, hazel, green, black", autoValid);
 
-  let foundPerson = people.filter(function (potentialMatch) {
+   let foundPerson = people.filter(function (potentialMatch) {
     if (
-      potentialMatch.firstName === firstName &&
-      potentialMatch.lastName === lastName
+      potentialMatch.eyeColor === eyeColor
     ) {
       return true;
     } else {
       return false;
     }
   });
-  // TODO: find the person single person object using the name they entered.
   return foundPerson;
 }
 
+function searchByDob(people) {
+  let dob= promptFor("What is the person's date of birth? mm/dd/yy", autoValid);
 
-// }
-
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (
+      potentialMatch.dob === dob
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return foundPerson;
+}
 //TODO: add other trait filter functions here.
 
 //#endregion
@@ -187,11 +195,46 @@ function autoValid(input) {
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
 function customValidation(input) {
-  if(input.tolowercase() == "blue" || "black" || "green" || "hazel" || "brown"){
+
     return true;
-  } else {
-    return false;
-  }
+
 }
+
+function searchByTraits(people){
+    let searchResults;
+    let searchTraitType = promptFor(
+      "which trait would you like to search for?", autoValid
+    ).toLowerCase();
+    switch (searchTraitType) {
+      case "eyecolor":
+        searchResults = searchByEyeColor(people);
+        displayPeople(searchResults);
+        break;
+      case "dob": 
+        searchResults = searchByDob(people);  // TODO: search by traits
+        break;
+      case "height":
+          searchResults = searchByHeight(people);
+          break;
+          case "weight" :
+            searchResults = searchByweight(people);
+            break;
+            case "gender":
+              searchResults = searchbyGender(people);
+              break;
+              case "occupation":
+                searchResults = searchByOccupation(people);
+                break;
+                case "parents":
+                  searchResults = searchByParents(people);
+                  break;
+                  case "currentSpouse":
+                    searchResults = searchByCurrentSpouse(people);
+                    break;
+        default:
+        searchByTraits(people); // restart app
+        break;
+    }
+} 
 
 //#endregion
