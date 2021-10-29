@@ -13,7 +13,8 @@ function app(people) {
     case "yes":
       searchResults = searchByName(people);
       break;
-    case "no": prompt("What trait do you want to search using?")// TODO: search by traits
+    case "no": 
+      searchResults = prompt("What trait do you want to search by?");// TODO: search by traits
       break;
     default:
       app(people); // restart app
@@ -35,19 +36,22 @@ function mainMenu(person, people) {
 
   let displayOption = promptFor(
     "Found " +
-      person.firstName +
+      person[0].firstName +
       " " +
-      person.lastName +
+      person[0].lastName +
       " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'",
     autoValid
   );
 
   switch (displayOption) {
-    case "info":// TODO: get person's info
+    case "info":
+    let randomInfo = displayPerson(person[0]);// TODO: get person's info
       break;
-    case "family":// TODO: get person's family
+    case "family":
+     randomInfo = displayPerson(person[0].cuurentSpouse);// TODO: get person's family
       break;
-    case "descendants":// TODO: get person's descendants
+    case "descendants":
+    randomDescendants = app(data["spouse"].map); //TODO: get person's descendants
       break;
     case "restart":
       app(people); // restart
@@ -57,8 +61,8 @@ function mainMenu(person, people) {
     default:
       return mainMenu(person, people,); // ask again
   }
+  mainMenu(person,people);
 }
-
 //#endregion
 
 //Filter functions.
@@ -86,19 +90,26 @@ function searchByName(people) {
 }
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 
-function searchByEyeColor(data) {
-  let eyeColor = promptFor["brown", "black", "hazel", "green", "blue"];
-  let foundEyeColor = data.filter(function (potentialMatch){
-    if(
-      potentialMatch.eyeColor === ["brown", "black", "hazel", "green", "blue"]
-    ){
+function searchByEyeColorpeople) {
+  let firstName = promptFor("What is the person's first name?", autoValid);
+  let lastName = promptFor("What is the person's last name?", autoValid);
+
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (
+      potentialMatch.firstName === firstName &&
+      potentialMatch.lastName === lastName
+    ) {
       return true;
     } else {
       return false;
     }
   });
-  return eyeColor, foundEyeColor;
+  // TODO: find the person single person object using the name they entered.
+  return foundPerson;
 }
+
+
+// }
 
 //TODO: add other trait filter functions here.
 
@@ -125,6 +136,15 @@ function displayPerson(person) {
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  personInfo += "gender: " + person.gender + "\n";
+  personInfo += "dob: " +  person.dob + "\n";
+  personInfo += "height: " + person.height + "\n";
+  personInfo += "weight: " + person.weight + "\n";
+  personInfo += "eyeColor: " + person.eyeColor + "\n";
+  personInfo += "occupation: " + person.occupation + "\n";
+  personInfo += "parents: " + person.parents + "\n";
+  personInfo += "currentSpouse: " + person.currentSpouse + "\n";
+  
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
@@ -166,6 +186,12 @@ function autoValid(input) {
 
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
-function customValidation(input) {}
+function customValidation(input) {
+  if(input.tolowercase() == "blue" || "black" || "green" || "hazel" || "brown"){
+    return true;
+  } else {
+    return false;
+  }
+}
 
 //#endregion
