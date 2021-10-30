@@ -42,6 +42,7 @@ function mainMenu(person, people) {
     autoValid
   );
 
+  
   switch (displayOption) {
     case "info":
     let randomInfo = displayPerson(person[0]);// TODO: get person's info
@@ -159,12 +160,41 @@ function searchByHeight(people) {
       });
       return foundPerson;
     }
-      function searchByHeight(people) {
-        let dob= promptFor("What is the person's height in inches? ", autoValid);
+      function searchByParents(people) {
+        let parents = promptFor("What is the person's parents ", autoValid);
       
         let foundPerson = people.filter(function (potentialMatch) {
           if (
-            potentialMatch.height === height
+            potentialMatch.parents === parents
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        return foundPerson;
+      }
+
+      function searchByDescendants(people) {
+        let descendants = promptFor("What is the person's descendants? ", autoValid);
+      
+        let foundPerson = people.filter(function (potentialMatch) {
+          if (
+            potentialMatch.descendants === descendants
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        return foundPerson;
+      }
+      function searchbyGender(people) {
+        let gender = promptFor("What is the person's gender? ", autoValid);
+      
+        let foundPerson = people.filter(function (potentialMatch) {
+          if (
+            potentialMatch.gender === gender
           ) {
             return true;
           } else {
@@ -205,7 +235,7 @@ function displayPerson(person) {
   personInfo += "eyeColor: " + person.eyeColor + "\n";
   personInfo += "occupation: " + person.occupation + "\n";
   personInfo += "parents: " + person.parents + "\n";
-  personInfo += "currentSpouse: " + person.currentSpouse + "\n";
+  personInfo += "descendents: " + person.descendants + "\n";
   
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
