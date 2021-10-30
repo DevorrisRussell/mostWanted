@@ -90,7 +90,7 @@ function searchByName(people) {
 }
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 
-function searchByEyeColorpeople) {
+function searchByEyeColor(people) {
   let firstName = promptFor("What is the person's first name?", autoValid);
   let lastName = promptFor("What is the person's last name?", autoValid);
 
