@@ -51,7 +51,7 @@ function mainMenu(person, people) {
      let randomfamily = displayPerson(person[0]);// TODO: get person's family
       break;
     case "descendants":
-    let randomDescendants =displayPerson(person[0]); //TODO: get person's descendants
+    let randomDescendants = displayPerson(person[0]); //TODO: get person's descendants
       break;
     case "restart":
       app(people); // restart
@@ -104,9 +104,8 @@ function searchByEyeColor(people) {
   });
   return foundPerson;
 }
-
 function searchByDob(people) {
-  let dob= promptFor("What is the person's date of birth? mm/dd/yy", autoValid);
+  let dob= promptFor("What is the person's date of birth? mm/dd/yyyy", autoValid);
 
   let foundPerson = people.filter(function (potentialMatch) {
     if (
@@ -119,13 +118,94 @@ function searchByDob(people) {
   });
   return foundPerson;
 }
+function searchByHeight(people) {
+  let height = promptFor("What is the person's height in inches?", autoValid);
+
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (
+      potentialMatch.height === height
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return foundPerson;
+}
+function searchByWeight(people) {
+  let weight= promptFor("What is the person's weight in pounds?", autoValid);
+
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (
+      potentialMatch.weight === weight
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return foundPerson;
+}
+function searchByOccupation(people) {
+  let occupation = promptFor("What is the person's occupation?", autoValid);
+
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (
+      potentialMatch.occupation === occupation
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return foundPerson;
+}
+function searchByParents(people) {
+  let parents = promptFor("What is the person's parents?", autoValid);
+
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (
+      potentialMatch.parents === parents
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return foundPerson;
+}
+function searchByDescendants(people) {
+  let descendants = promptFor("What is the person's decendants?", autoValid);
+
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (
+      potentialMatch.descendants === descendants
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return foundPerson;
+}
+ function searchByGender(people) {
+  let gender = promptFor("What is the person's gender?", autoValid);
+
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (
+      potentialMatch.gender === gender
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return foundPerson;
+}
 //TODO: add other trait filter functions here.
-
 //#endregion
-
 //Display functions.
 //Functions for user interface.
-/////////////////////////////////////////////////////////////////
 //#region
 
 // alerts a list of people
@@ -151,19 +231,17 @@ function displayPerson(person) {
   personInfo += "eyeColor: " + person.eyeColor + "\n";
   personInfo += "occupation: " + person.occupation + "\n";
   personInfo += "parents: " + person.parents + "\n";
-  personInfo += "currentSpouse: " + person.currentSpouse + "\n";
+  personInfo += "descendants: " + person.descendants + "\n";
   
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
 
 //#endregion
-
 //Validation functions.
 //Functions to validate user input.
 /////////////////////////////////////////////////////////////////
 //#region
-
 //a function that takes in a question to prompt, and a callback function to validate the user input.
 //response: Will capture the user input.
 //isValid: Will capture the return of the validation function callback. true(the user input is valid)/false(the user input was not valid).
@@ -177,7 +255,6 @@ function promptFor(question, valid) {
   } while (response === "" || isValid === false);
   return response;
 }
-
 // helper function/callback to pass into promptFor to validate yes/no answers.
 function yesNo(input) {
   if (input.toLowerCase() == "yes" || input.toLowerCase() == "no") {
@@ -191,7 +268,6 @@ function yesNo(input) {
 function autoValid(input) {
   return true; // default validation only
 }
-
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
 function customValidation(input) {
@@ -211,25 +287,32 @@ function searchByTraits(people){
         displayPeople(searchResults);
         break;
       case "dob": 
-        searchResults = searchByDob(people);  // TODO: search by traits
+        searchResults = searchByDob(people);
+        displayPeople(searchResults);  // TODO: search by traits
         break;
       case "height":
           searchResults = searchByHeight(people);
+          displayPeople(searchResults);
           break;
           case "weight" :
-            searchResults = searchByweight(people);
+            searchResults = searchByWeight(people);
+            displayPeople(searchResults);
             break;
             case "gender":
-              searchResults = searchbyGender(people);
+              searchResults = searchByGender(people);
+              displayPeople(searchResults);
               break;
               case "occupation":
                 searchResults = searchByOccupation(people);
+                displayPeople(searchResults);
                 break;
-                case "parents":
+                case "descendants":
                   searchResults = searchByParents(people);
+                  displayPeople(searchResults);
                   break;
-                  case "currentSpouse":
-                    searchResults = searchByCurrentSpouse(people);
+                  case "family":
+                    searchResults = searchByfamily(people);
+                    displayPeople(searchResults);
                     break;
         default:
         searchByTraits(people); // restart app
