@@ -4,8 +4,7 @@
 //#region
 // app is the function called to start the entire application
 function app(people) {
-  let searchType = promptFor(
-    "Do you know the name of the person you are looking for? Enter 'yes' or 'no'",
+  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'",
     yesNo
   ).toLowerCase();
   let searchResults;
@@ -43,6 +42,7 @@ function mainMenu(person, people) {
     autoValid
   );
 
+  
   switch (displayOption) {
     case "info":
     let randomInfo = displayPerson(person[0]);// TODO: get person's info
@@ -91,9 +91,8 @@ function searchByName(people) {
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 
 function searchByEyeColor(people) {
-  let eyeColor = promptFor("which color would you like to search for? blue, brown, hazel, green, black", autoValid);
-
-   let foundPerson = people.filter(function (potentialMatch) {
+let eyeColor = promptFor("which color would you like to search for? blue, brown, hazel, green, black", autoValid);
+ let foundPerson = people.filter(function (potentialMatch) {
     if (
       potentialMatch.eyeColor === eyeColor
     ) {
@@ -105,7 +104,11 @@ function searchByEyeColor(people) {
   return foundPerson;
 }
 function searchByDob(people) {
+<<<<<<< HEAD
   let dob= promptFor("What is the person's date of birth? mm/dd/yyyy", autoValid);
+=======
+  let dob = promptFor("What is the person's date of birth? mm/dd/yyyy", autoValid);
+>>>>>>> 416a8fa91351480a8c834edfdcd2f611e0844cb2
 
   let foundPerson = people.filter(function (potentialMatch) {
     if (
@@ -119,7 +122,95 @@ function searchByDob(people) {
   return foundPerson;
 }
 function searchByHeight(people) {
+<<<<<<< HEAD
   let height = promptFor("What is the person's height in inches?", autoValid);
+=======
+  let height = promptFor("What is the person's height in inches? ", autoValid);
+
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (
+      potentialMatch.height === height
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return foundPerson;
+}
+  function searchByWeight(people) {
+    let weight = promptFor("What is the person's weight in pounds ? ", autoValid);
+  
+    let foundPerson = people.filter(function (potentialMatch) {
+      if (
+        potentialMatch.weight === weight
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    return foundPerson;
+  }
+    function searchByOccupation(people) {
+      let occupation = promptFor("What is the person's occupation? ", autoValid);
+    
+      let foundPerson = people.filter(function (potentialMatch) {
+        if (
+          potentialMatch.occupation === occupation
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      return foundPerson;
+    }
+      function searchByParents(people) {
+        let parents = promptFor("What is the person's parents ", autoValid);
+      
+        let foundPerson = people.filter(function (potentialMatch) {
+          if (
+            potentialMatch.parents === parents
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        return foundPerson;
+      }
+
+      function searchByDescendants(people) {
+        let descendants = promptFor("What is the person's descendants? ", autoValid);
+      
+        let foundPerson = people.filter(function (potentialMatch) {
+          if (
+            potentialMatch.descendants === descendants
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        return foundPerson;
+      }
+      function searchbyGender(people) {
+        let gender = promptFor("What is the person's gender? ", autoValid);
+      
+        let foundPerson = people.filter(function (potentialMatch) {
+          if (
+            potentialMatch.gender === gender
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        return foundPerson;
+      }
+//TODO: add other trait filter functions here.
+>>>>>>> 416a8fa91351480a8c834edfdcd2f611e0844cb2
 
   let foundPerson = people.filter(function (potentialMatch) {
     if (
@@ -231,7 +322,11 @@ function displayPerson(person) {
   personInfo += "eyeColor: " + person.eyeColor + "\n";
   personInfo += "occupation: " + person.occupation + "\n";
   personInfo += "parents: " + person.parents + "\n";
+<<<<<<< HEAD
   personInfo += "descendants: " + person.descendants + "\n";
+=======
+  personInfo += "descendents: " + person.descendants + "\n";
+>>>>>>> 416a8fa91351480a8c834edfdcd2f611e0844cb2
   
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
@@ -281,11 +376,12 @@ function searchByTraits(people){
     let searchTraitType = promptFor(
       "which trait would you like to search for?", autoValid
     ).toLowerCase();
-    switch (searchTraitType) {
-      case "eyecolor":
-        searchResults = searchByEyeColor(people);
+    switch (searchTraitType){
+     case "eyecolor":
+      searchResults = searchByEyeColor(people);
         displayPeople(searchResults);
         break;
+<<<<<<< HEAD
       case "dob": 
         searchResults = searchByDob(people);
         displayPeople(searchResults);  // TODO: search by traits
@@ -316,8 +412,36 @@ function searchByTraits(people){
                     break;
         default:
         searchByTraits(people); // restart app
+=======
+     case "dob": 
+    searchResults = searchByDob(people); 
+        displayPeople(searchResults); // TODO: search by traits
+>>>>>>> 416a8fa91351480a8c834edfdcd2f611e0844cb2
         break;
-    }
-} 
-
-//#endregion
+    case "height":
+   searchResults = searchByHeight(people);
+   displayPeople(searchResults);
+   break;
+   case "weight":
+   searchResults = searchByweight(people);
+   displayPeople(searchResults);
+   break;
+   case "gender":
+   searchResults = searchbyGender(people);
+   displayPeople(searchResults);
+   break;
+   case "occupation":
+   searchResults = searchByOccupation(people);
+   displayPeople(searchResults);
+   break;
+   case "decendents":
+   searchResults = searchByParents(people);
+   displayPeople(searchResults);
+   break;
+   case "currentSpouse":
+   searchResults = searchByCurrentSpouse(people);
+   displayPeople(searchResults);
+   break;
+   default:
+   searchByTraits(people); 
+   break; } }  
