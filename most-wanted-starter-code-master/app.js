@@ -42,7 +42,7 @@ function mainMenu(person, people) {
     autoValid
   );
 
-  
+  function displayID(people) { 
   switch (displayOption) {
     case "info":
     let randomInfo = displayPerson(person[0]);// TODO: get person's info
@@ -60,7 +60,7 @@ function mainMenu(person, people) {
       return; // stop execution
     default:
       return mainMenu(person, people,); // ask again
-  }
+  } 
   mainMenu(person,people);
 }
 //#endregion
@@ -102,7 +102,7 @@ let eyeColor = promptFor("which color would you like to search for? blue, brown,
     }
   });
   return foundPerson;
-}
+} 
 
 function searchByDob(people) {
   let dob = promptFor("What is the person's date of birth? mm/dd/yyyy", autoValid);
@@ -160,12 +160,28 @@ function searchByHeight(people) {
       });
       return foundPerson;
     }
-      function searchByParents(people) {
-        let parents = promptFor("What is the person's parents ", autoValid);
-      
+      function searchByF(people) {
+        let parents = promptFor("What is the person's last name?", autoValid);
+        let lastName = promptFor("What is the person's last name?", autoValid);
+
         let foundPerson = people.filter(function (potentialMatch) {
           if (
             potentialMatch.parents === parents
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        return foundPerson;
+      }
+
+      function searchByFamily(people) {
+        let family = promptFor("What is the person's last name?", autoValid);
+      
+        let foundPerson = people.filter(function (potentialMatch) {
+          if (
+            potentialMatch.family === searchByFamily
           ) {
             return true;
           } else {
@@ -207,6 +223,10 @@ function searchByHeight(people) {
 
 //#endregion
 
+
+
+  
+
 //Display functions.
 //Functions for user interface.
 /////////////////////////////////////////////////////////////////
@@ -226,11 +246,11 @@ function displayPeople(people) {
 function displayPerson(person) {
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  let personInfo = "First Name: " + person.firstName + "\n";
+  personInfo += "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "gender: " + person.gender + "\n";
   personInfo += "dob: " +  person.dob + "\n";
-  personInfo += "height: " + person.height + "\n";
+  personInfo += "height:"  + person.height + "\n";
   personInfo += "weight: " + person.weight + "\n";
   personInfo += "eyeColor: " + person.eyeColor + "\n";
   personInfo += "occupation: " + person.occupation + "\n";
@@ -314,14 +334,11 @@ function searchByTraits(people){
    searchResults = searchByOccupation(people);
    displayPeople(searchResults);
    break;
-   case "decendents":
-   searchResults = searchByParents(people);
-   displayPeople(searchResults);
-   break;
-   case "currentSpouse":
-   searchResults = searchByCurrentSpouse(people);
-   displayPeople(searchResults);
-   break;
+   //case "decendents":
+  // searchResults = searchByParents(people);
+   //displayPeople(searchResults);
+  // break;
+
    default:
    searchByTraits(people); 
    break; } }  
