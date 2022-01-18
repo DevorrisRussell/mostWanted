@@ -333,3 +333,4 @@ function cycleThroughTraits(traits){
  let newSearch=prompt("Enter "+ traits)
  return newSearch
 }
+
